@@ -19,7 +19,9 @@ export default function UIScanner({clicked, getQrCode}) {
                         getQrCode(data);
                         clicked();
                     }
-                    else setData("Not Found");
+                    else {
+                        setData("Not Found")
+                    };
                 }}
             />
         </div>

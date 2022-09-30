@@ -1,12 +1,15 @@
 import { BtnIcon, BtnPrimary } from "./UIButtons";
 import { ReactSVG } from 'react-svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UIScanner from "./UIScanner";
+import axios from "axios";
+import UIUser from "./UIUser";
 
 export default function UIScanArea() {
 
     const [isVisible, setVisible] = useState(false);
     const [qrcode, setCode] = useState('');
+    const [userData, setUserData] = useState();
 
     const openscanner = ()=> {
         setVisible(!isVisible)
@@ -19,6 +22,18 @@ export default function UIScanArea() {
     const valueChanged = (event)=> {
         setCode(event.target.value)
     }   
+
+
+    useEffect(()=> {
+
+        if(qrcode.length) {
+            const gq = axios.get(qrcode).then((res)=> {
+                console.log(res.data)
+                setUserData(res.data)
+            })
+        }
+
+    }, [qrcode])
    
 
   return (
@@ -41,6 +56,13 @@ export default function UIScanArea() {
 
             <UIScanner clicked={openscanner} getQrCode={setQrCode}/>
         }
+
+        {
+            userData &&
+
+            <UIUser data={userData} />
+        }
+
     </div>
   )
 }
