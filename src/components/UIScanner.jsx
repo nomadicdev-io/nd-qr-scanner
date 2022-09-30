@@ -17,13 +17,14 @@ export default function UIScanner({clicked, getQrCode}) {
                     if (result){
                         setData(result.text);
                         getQrCode(data);
-                        clicked();
+                        // clicked();
                     }
                     else {
                         setData("Not Found")
                     };
                 }}
             />
+            <p>{data}</p>
         </div>
 
         <div className="clsoe_btn" onClick={clicked}>
