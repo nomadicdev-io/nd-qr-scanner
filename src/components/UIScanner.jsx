@@ -2,7 +2,7 @@ import { useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { ReactSVG } from 'react-svg';
 
-export default function UIScanner({clicked}) {
+export default function UIScanner({clicked, getQrCode}) {
 
     const [data, setData] = useState("Not Found");
 
@@ -14,7 +14,11 @@ export default function UIScanner({clicked}) {
         <div className="placeholder_">
             <BarcodeScannerComponent
                 onUpdate={(err, result) => {
-                    if (result) setData(result.text);
+                    if (result){
+                        setData(result.text);
+                        getQrCode(data);
+                        clicked();
+                    }
                     else setData("Not Found");
                 }}
             />

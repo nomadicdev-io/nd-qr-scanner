@@ -6,10 +6,19 @@ import UIScanner from "./UIScanner";
 export default function UIScanArea() {
 
     const [isVisible, setVisible] = useState(false);
+    const [qrcode, setCode] = useState('');
 
     const openscanner = ()=> {
         setVisible(!isVisible)
     }
+
+    const setQrCode = (value)=> {
+        setCode(value);
+    }
+
+    const valueChanged = (event)=> {
+        setCode(event.target.value)
+    }   
    
 
   return (
@@ -18,7 +27,7 @@ export default function UIScanArea() {
        
 
         <form className="scan_wrapper">
-            <input type="text"/>
+            <input type="text" value={qrcode} onChange={valueChanged}/>
             <BtnIcon clicked={openscanner}>
                 <>
                 <ReactSVG wrapper="span" src="./qr-code.svg" />
@@ -30,7 +39,7 @@ export default function UIScanArea() {
         {
             isVisible &&
 
-            <UIScanner clicked={openscanner}/>
+            <UIScanner clicked={openscanner} getQrCode={setQrCode}/>
         }
     </div>
   )
