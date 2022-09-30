@@ -1,6 +1,6 @@
-export const BtnIcon = ({children})=> {
+export const BtnIcon = ({children, clicked})=> {
     return (
-        <div className="btn_icon">
+        <div className="btn_icon" onClick={clicked}>
             {children}
         </div>
     )
