@@ -16,8 +16,8 @@ export default function UIScanner({clicked, getQrCode}) {
                 onUpdate={(err, result) => {
                     if (result){
                         setData(result.text);
-                        getQrCode(data);
-                        // clicked();
+                        getQrCode(result.text);
+                        clicked();
                     }
                     else {
                         setData("Not Found")
